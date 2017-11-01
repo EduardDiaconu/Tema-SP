@@ -1,0 +1,9 @@
+t = 0:0.002:4; // Rezolutie temporala de 2ms. Pentru rezolutiile temporale de 20 si 200ms se inlocuieste cu t=0:0.02:2, respectiv t=0:0.2:2
+F=1/3; // frecventa
+w=2*pi*F; // pulsatie
+y=0.8*sin(w*t); // generare semnal
+y(y<0) = 0;  // redresarea semnalului. Cand y ia valori mai mici ca 0, ele se vor reseta la 0 in schimb
+plot(t, y, 'b');
+title('Redresare monoalternanta');
+xlabel('t (s)');
+ylabel('y(t) (V)');
