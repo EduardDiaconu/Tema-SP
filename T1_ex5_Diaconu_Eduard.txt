@@ -1,0 +1,8 @@
+t = 0:0.002:8; / Rezolutie temporala de 2ms. Pentru rezolutiile temporale de 20 si 200ms se inlocuieste cu t=0:0.02:2, respectiv t=0:0.2:2
+F=1/4; // frecventa
+w=2*pi*F; // pulsatia
+y=1.5*abs(sin(w*t)); // modulul functiei face posibila redresarea dubla alternanta
+plot(t, y, 'b' );
+title('Redresare dubla alternanta');
+xlabel('t (s)');
+ylabel('y(t) (V)');
