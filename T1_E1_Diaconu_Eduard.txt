@@ -1,0 +1,6 @@
+clc // se va sterge fereastra de comanda inainte de executie
+a=0:0.1:2; // vectorul linie cerut; vectorul b trebuie sa aiba 21 de elemente pentru ca inmultirea sa fie posibila
+b=linspace(1, 1, 21); // vectorul LINIE
+c=a*b(:) // realizarea inmultirii, rezultatul este 21, b(:) semnifica faptul ca vectorul linie se transforma in vector coloana
+
+
