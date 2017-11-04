@@ -1,0 +1,49 @@
+t=0:0.002:15; // Rezolutie temporala de 2 ms, pentru 20, 200 ms se va scrie t=0:0.02:15 respectiv t=0:0.2:15
+niv = [ -1 1 ];
+figure(1) // graficul subpunctului a fost creat separat intr-un grafic separat
+hold on // retine graficul si adauga in aceeasi fereastra alt grafic
+title('Semnal dreptunghiular multinivel aleator');
+xlabel('t(s)');
+ylabel('y(t) (V)');
+ 
+for n=0:0.25:40
+    y = datasample(niv, 1); // va returna o observatie extrasa aleator din vectorul niv
+    plot(t, y*rectpuls(t-n, 0.25)) // rectpuls va genera un impuls unitate de durata 0.25 centrat in t-n. Analog pentru urmatoarele subpuncte
+end
+ 
+ 
+ 
+niv = [ -3 -1 1 3 ];
+figure(2)
+hold on
+title('Semnal dreptunghiular multinivel aleator');
+xlabel('t(s)');
+ylabel('y(t) (V)');
+for n=0:0.25:40
+    y = datasample(niv, 1);
+    plot(t, y*rectpuls(t-n, 0.25))
+end
+
+niv = [ -5 -3 -1 1 3 5 ];
+figure(3)
+hold on
+title('Semnal dreptunghiular multinivel aleator');
+xlabel('t(s)');
+ylabel('y(t) (V)');
+for n=0:0.25:40
+    y = datasample(niv, 1);
+    plot(t, y*rectpuls(t-n, 0.25))
+end
+ 
+ 
+ 
+niv = [ -7 -5 -3 -1 1 3 5 7];
+figure(4)
+hold on
+title('Semnal Dreptunghiular');
+xlabel('t(s)');
+ylabel('y(t) (V)');
+for n=0:0.25:40
+    y = datasample(niv, 1);
+    plot(t, y*rectpuls(t-n, 0.25))
+end
