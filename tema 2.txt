@@ -1,0 +1,48 @@
+syms t;
+P=40;  %Perioada semnalului triunghiular
+N=50; %Numar de coeficienti
+D=8; %Durata semnalului triunghiular
+t1=0:0.2:80;
+w0=2*pi/P; %Pulsatia semnalului triunghiular
+s=0.5*sawtooth(w0*t1, 0.8)+0.5; %Semnalul triunghiular initial
+s1=t*1/32; %Dreapta crescatoare
+s2=-(t/8)+5; %Dreapta descrescatoare
+X0=int(s1, t, 0, P-D) + int(s2, t, P-D, P); %Componenta continua
+disp('X0=');
+disp(X0);
+a=zeros(1, N); %Initializarea amplitudinilor
+freq=zeros(1, N); %Initializarea frecventelor
+y=0; %Initilizarea semnalului de reconstruit
+for k=1:N
+    f1=s1*exp(-1j*w0*k*t); %Cele doua functii f1 si f2 auxiliare pentru a calcula integrala
+    f2=s2*exp(-1j*w0*k*t);
+    Xk=int(f1, t, 0, P-D)+int(f2, t, P-D, P); %Calculul coeficientilor, integrale facute pe cele 2 drepte crescatoare, respectiv descrescatoare
+    a(k)=sqrt((imag(Xk))^2+(real(Xk))^2); %Calculul amplitudinilor
+    freq(k)=k/P; %Calculul frecventelor
+    S=['X', num2str(k), '='];
+    disp(S);
+    disp(Xk);
+    y=y+2*1/P*(Xk*exp(1j*k*w0*t1)); %Semnalul reconstruit, dar fara componenta continua
+end
+y1=y+1/P*X0; %Semnalul reconstruit cu tot cu componenta continua
+figure(1)
+stem(0, X0)
+hold on
+stem(freq, a, 'r')
+hold on
+stem(-freq, a, 'r')
+title('Spectrul de amplitudini');
+xlim([-N/P N/P])
+figure(2)
+plot(t1, s, 'g')
+hold on
+plot(t1, y1, '--r')
+title('Semnalul initial si cel reconstruit')
+legend('Semnal initial', 'Semnal reconstruit')
+axis([0 80 -2 2])
+
+Explicatii:
+Se foloseste seria Fourier exponentiala pentru a reconstrui un semnal triunghiular. Primul pas este calculul coeficientilor seriei Fourier(primii 50), iar apoi se va
+trece la reprezentarea spectrului de amplitudini ale semnalului. Pentru aceasta se va reprezenta grafic modulul coeficientilor seriei Fourier in functie de frecventele
+la care apar. Se observa ca acele componente la frecvente mari sunt neglijabile, iar componenta la frecventa 0 este chiar componenta continua. Observam ca la
+reconstruirea cu ajutorul celor 50 de coeficienti cele 2 semnale(cel original si cel reconstruit) se suprapun.
